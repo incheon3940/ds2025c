@@ -17,8 +17,11 @@ class LinkedList:
         current.link = Node(data)
 
     def remove(self, target):
-        if self.head.data == target:
+        # if self.head.data == target:
+        current = self.head
+        if current.data == target:
             self.head = self.head.link
+            current.link = None
             return
         current = self.head
         previous = None

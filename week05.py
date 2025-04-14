@@ -1,13 +1,16 @@
-s1 = list()
-print(len(s1))
-s1.append("Data structure")
-s1.append("Database")
-print(len(s1))
-print(s1[-1])
-print(s1)
-print(s1.pop())
-print(s1)
-print(s1.pop())
-print(s1)
-print(s1.pop())
-print(s1)
+def is_vaild_brackets(expression : str) -> bool:
+    stack = []
+    brackets = {')':'(', '}':'{', ']':'['}
+
+    for letter in expression:
+        if letter in brackets.values():
+            stack.append(letter)
+        if letter in brackets.keys():
+            if not stack or stack.pop() != brackets[letter]:
+                return False
+    return not stack
+
+print(is_vaild_brackets("([2+3])"))
+print(is_vaild_brackets("(2+(2*3))"))
+print(is_vaild_brackets("(2+(2+3)"))
+print(is_vaild_brackets(")2+(2+3)("))

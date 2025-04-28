@@ -38,5 +38,20 @@ if __name__ == "__main__":
                 current = current.right  # move
 
     print("BST 구성 완료")
-
     post_order(root)
+
+    find_number = int(input())
+    current = root
+    while True:
+        if number < current.data:
+            if current.left is None:
+                current.left = node
+                print(f"{find_number}을(를) 찾았습니다")
+                break
+            current = current.left  # move
+        else:
+            if current.right is None:
+                current.right = node
+                print(f"{find_number}을(를) 찾았습니다")
+                break
+            current = current.right  # move

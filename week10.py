@@ -53,17 +53,14 @@ def search(find_number):
     current = root
     while True:
         if find_number == current.data:
-            print(f"{find_number}을(를) 찾았습니다")
-            break
+            return True
         elif find_number < current.data:
             if current.left is None:
                 print(f"{find_number}이(가) 존재하지 않습니다")
-                break
             current = current.left
         else:
             if current.right is None:
-                print(f"{find_number}이(가) 존재하지 않습니다")
-                break
+                return False
             current = current.right
 
 
@@ -85,4 +82,7 @@ if __name__ == "__main__":
     print()
 
     number = int(input("찾는 값 입력 : "))
-    search(number)
+    if search(number):
+        print(f"{number}를 찾았습니다")
+    else:
+        print(f"{number}이(가) 존재하지 않습니다.")

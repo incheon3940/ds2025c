@@ -62,6 +62,7 @@ def search(find_number):
 def delete(node, value):
     if node is None:
         return None
+
     if value < node.data:
         node.left = delete(node.left, value)
     elif value > node.data:
@@ -71,6 +72,11 @@ def delete(node, value):
             return node.right
         elif node.right is None:
             return node.left
+        min_larger_node = node.right
+        while min_larger_node.left:
+            min_larger_node = min_larger_node.left
+        node.data = min_larger_node.data
+        node.right = delete(node.right, min_larger_node.data)
     return node
 
 if __name__ == "__main__":
@@ -91,7 +97,7 @@ if __name__ == "__main__":
     print()
 
     find_number = int(input("찾는 값 입력 : "))
-    if search(number):
+    if search(find_number):
         print(f"{find_number}를 찾았습니다")
     else:
         print(f"{find_number}이(가) 존재하지 않습니다.")
@@ -100,4 +106,8 @@ if __name__ == "__main__":
     root = delete(root,delete_number)
 
     post_order(root)
+    print()
+    in_order(root)
+    print()
+    pre_order(root)
     print()

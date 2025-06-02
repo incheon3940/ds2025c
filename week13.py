@@ -14,36 +14,16 @@ def print_graph(g) :
 		print()
 	print()
 
+def dfs(g, current, visited):
+	visited.append(current)
+	for vertex in range(graph_size):
+		if g.graph[current][vertex] > 0 and vertex not in visited:
+			dfs(g, vertex, visited)
+
 def find_vertex(g, find_vtx) :
-	stack = list()
-	visited_ary = list()
-
-	i = 0
-	stack.append(i)
-	visited_ary.append(i)
-
-	while stack:
-		next = None
-		for j in range(graph_size):
-			if g.graph[i][j] != 0:
-				if j in visited_ary:
-					pass
-				else :
-					next = j
-					break
-
-		if next is not None:
-			i = next
-			stack.append(i)
-			visited_ary.append(i)
-		else :
-			i = stack.pop()
-
-	if find_vtx in visited_ary:
-		return True
-	else :
-		return False
-
+	visited_array = list()
+	dfs(g, 0, visited_array)
+	return find_vtx in visited_array # True or False
 
 g1 = None
 name_ary = ['인천', '서울', '강릉', '대전', '광주', '부산']
@@ -96,7 +76,7 @@ while len(new_ary) > graph_size - 1:
 		g1.graph[end][start] = save_cost
 		index = index + 1
 
-print('최소 비용의 도로 연결도')
+print('최소 비용 : ')
 print_graph(g1)
 
 total_cost = 0
